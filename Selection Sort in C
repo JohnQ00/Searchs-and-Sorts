@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void swap(int *x,int *y)
+{
+	int aux = *x;
+	*x = *y;
+	*y = aux;
+}
+
 void printar(int a[],int size)
 {
 	int i;
@@ -22,11 +29,9 @@ void selection(int a[],int size)
 		{	
 			if (a[j] < a[min])
 			{
-				aux = a[j];
-				a[j] = a[min];
-				a[min] = aux;
+				min = j;
+				swap(&a[i], &a[min]);
 			}
-			min = j;
 		}
 	}
 }
@@ -52,4 +57,3 @@ int main()
 
 	return 0;
 }
-
