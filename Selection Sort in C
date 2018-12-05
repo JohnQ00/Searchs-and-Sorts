@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void printar(int a[],int size)
+{
+	int i;
+
+	for (i = 0; i < size; ++i)
+	{
+		printf("%d\n", a[i]);
+	}
+}
+
+void selection(int a[],int size)
+{
+	int i,j,min,aux;
+
+	for (i = 0; i < size - 1; ++i)
+	{
+		min = i;
+		for (j = i + 1; j < size; ++j)
+		{	
+			if (a[j] < a[min])
+			{
+				aux = a[j];
+				a[j] = a[min];
+				a[min] = aux;
+			}
+			min = j;
+		}
+	}
+}
+
+int main()
+{
+	int array[1000];
+	int i = sizeof(int);
+
+	for (i = 0; i < 1000; ++i)
+	{
+		scanf("%d", &array[i]);
+		
+		if (array[i] == -1)
+		{
+			break;
+		}
+	}
+
+	selection(&array,i);
+
+	printar(&array,i);
+
+	return 0;
+}
+
