@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void printar(int a[],int size)
+{
+	int i;
+
+	for (i = 0; i < size; ++i)
+	{
+		printf("%d\n", a[i]);
+	}
+}
+
+void swap(int *x,int *y)
+{
+	int aux = *x;
+	*x = *y;
+	*y = aux;
+}
+
+void quick_sort(int *ar,int size)
+{
+	int pivot,a,b;
+
+	if (size <= 1){return;}
+	else
+	{
+		pivot = ar[size/2];
+		a = 0;
+		b = size - 1;
+
+		while(a < b)
+		{
+			while(ar[a] < pivot)a++;
+			while(ar[b] > pivot)b--;
+
+			if (a < b){swap(&ar[a],&ar[b]);}
+		}
+
+		quick_sort(ar, b);
+		quick_sort(ar + a, size - a);
+	}
+}
+
+int main()
+{
+	int a[1000],i;
+
+	for (i = 0; i < 10000; ++i)
+	{
+		scanf("%d", &a[i]);
+
+		if (a[i] == -1){break;}	
+	}
+
+	quick_sort(&a,i);
+
+	printar(&a,i);
+
+	return 0;
+}
