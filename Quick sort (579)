@@ -1,0 +1,93 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void printar(int a[],int size)
+{
+	int i;
+    
+    printf("Resultado final: ");
+	for (i = 0; i < size; ++i)
+	{   
+	    if(i == size - 1)
+	    {
+		    printf(" %d ", a[i]);
+	    }
+		else
+		{
+		    printf(" %d |", a[i]);
+		}
+		
+	}
+}
+
+void swap(int *x,int *y)
+{
+	int aux = *x;
+	*x = *y;
+	*y = aux;
+}
+
+void quick_sort(int *ar,int size)
+{
+	int pivot,a,b;
+
+	if (size <= 1){return;}
+	else
+	{
+		pivot = ar[size/2];
+		a = 0;
+		b = size - 1;
+
+		while(a < b)
+		{
+			while(ar[a] < pivot)
+			{
+			    a++;
+			}
+			while(ar[b] > pivot)
+			{
+			    b--;
+			}
+
+			if (a < b){swap(&ar[a],&ar[b]);}
+		}
+
+		quick_sort(ar, b);
+		quick_sort(ar + a, size - a);
+	}
+}
+
+int main()
+{
+	int a[1000],i = 0,j;
+
+	while(1)
+	{
+	    if (scanf("%d", &a[i]) == EOF){break;}
+		i++;
+	}
+	
+	
+	printf("Estado inicial: ");
+	
+	for (j = 0; j < i; ++j)
+	{   
+	    if(j == i - 1)
+	    {
+		    printf(" %d ", a[j]);
+	    }
+		else
+		{
+		    printf(" %d |", a[j]);
+		}
+		
+	}
+	
+	printf("\n");
+
+	quick_sort(&a,i);
+
+	printar(&a,i);
+
+	return 0;
+}
