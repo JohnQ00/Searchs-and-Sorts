@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void output(int *array,int size)
+{
+  int i;
+
+  for (i = 0; i < size; i++) 
+  {
+    printf("%d\n", array[i]);
+  }
+}
+void insertion_sort(int *array,int size)
+{
+  int i,j,key;
+
+  for (i = 1; i < size; i++) 
+  {
+    key = array[i];
+    j = i - 1;
+    while((j >= 0) && (array[j] > key))
+    {
+      array[j + 1] = array[j];
+      j--;
+    }
+    array[j + 1] = key;
+  }
+}
+
+int main()
+{
+  int *a = malloc(sizeof(int));
+  int i = 0;
+
+  while(scanf("%d", &a[i]))
+  {
+    if (a[i] == -1){break;}
+    i++;
+    a = realloc(a, i*sizeof(int));
+  }
+
+  insertion_sort(a,i);
+
+  output(a,i);
+
+  return 0;
+}
