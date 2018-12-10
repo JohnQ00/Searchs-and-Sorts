@@ -31,8 +31,8 @@ void quick_sort(int *ar,int size)
 
 		while(a < b)
 		{
-			while(ar[a] < pivot)a++;
-			while(ar[b] > pivot)b--;
+			while(ar[a] <= pivot){a++;}
+			while(ar[b] > pivot){b--;}
 
 			if (a < b){swap(&ar[a],&ar[b]);}
 		}
@@ -44,18 +44,19 @@ void quick_sort(int *ar,int size)
 
 int main()
 {
-	int a[1000],i;
+	int i = 0;
+	int *a = malloc(sizeof(int));
 
-	for (i = 0; i < 10000; ++i)
+	while(scanf("%d", &a[i]))
 	{
-		scanf("%d", &a[i]);
-
-		if (a[i] == -1){break;}	
+		if (a[i] == -1){break;}
+		i++;
+		a = realloc(a, i*sizeof(int));		
 	}
 
-	quick_sort(&a,i);
+	quick_sort(a,i);
 
-	printar(&a,i);
+	printar(a,i);
 
 	return 0;
 }
