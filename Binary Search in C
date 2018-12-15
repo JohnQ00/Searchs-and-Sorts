@@ -28,7 +28,7 @@ int bs(int *a, int size,int searched_number)
 int main()
 {
 	int *a = malloc(sizeof(int));
-	int i = 1,search;
+	int i = 0,search;
 
 	scanf("%d", &search);
 
