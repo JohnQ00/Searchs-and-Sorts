@@ -1,0 +1,81 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+int merge_sort(int *a,int size,int start)
+{
+	int middle;
+	if (start < size)
+	{
+		middle = (start + size)/2;
+		merge_sort(a,middle + 1,start);
+		merge_sort(a,size,middle);
+		merge(a,size,start,middle);
+	}
+}
+
+int merge(int *a,int size,int start,int middle)
+{
+	int n1 = middle - start + 1,i;
+	int n2 = size - middle,j;
+	int L[n1],R[n2];
+
+	for (i = 1; i < n1; ++i)
+	{
+		(*(L + i)) = (*(a + i)); 
+	}
+
+	for (j = 1; j < n1; ++j)
+	{
+		(*(R + j)) = (*(a + j)); 
+	}
+
+	(*(L + (n1 + 1))) = INT_MAX;
+	(*(R + (n1 + 1))) = INT_MAX;
+	i = 1;
+	j = 1;
+	int k = 1;
+
+	while(k < size)
+	{
+		if ((*(L + i)) <= (*(R + j)))
+		{
+			(*(a + k)) = (*(L + i));
+			i++;
+		}
+		else
+		{
+			(*(a + k)) = (*(R + j));
+			j++;
+		}
+	}
+}
+
+void printar(int *a,int size)
+{
+	int i;
+
+	for (i = 0; i < size - 1; ++i)
+	{
+		printf("%d\n", a[i]);
+	}
+}
+
+int main()
+{
+	int *a = malloc(sizeof(int));
+	int i;
+
+	while(scanf("%d", &*(a + i)))
+	{
+		if (*(a + i) == -1){break;}
+		i++;
+		a = realloc(a, i * sizeof(int));
+	}
+
+	merge_sort(a,i,0);
+	
+	printar(a,i);
+
+	return 0;
+}
