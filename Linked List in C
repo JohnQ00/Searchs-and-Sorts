@@ -1,0 +1,46 @@
+//Listas Encadeadas
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node
+{
+	void *item;
+	struct node *next;
+};
+
+create(){return NULL;}
+
+struct node* add(struct node *head, void *item)
+{
+	struct node *new_node = (void*) malloc(sizeof(struct node)); //Aloca dinamicamente o struct node e cria uma variável temporária "new_node"
+	new_node->item = item; //Faz com que a nova variável aponte para o item no struct e receba o valor de item;
+	new_node->next = head; //Faz com que a nova variável aponte para o next no struct e receba o valor dado na main para head;
+	return new_node; //Retorna o next como cabeça, prosseguindo com a lista.
+}
+void print(struct node *head)
+{
+	while(head != NULL)
+	{
+		printf("%d\n", head->item);//Aqui temos um ponteiro do primeiro elemento apontando para item;
+		head = head->next;//Para vasculhar toda a lista head recebe head apontando para o próximo.
+	}
+}
+
+int main()
+{
+	int e;
+	struct node * head = create();
+
+	while(1)
+	{
+		scanf("%d", &e);
+		if (e == -1)
+		{break;}
+		head = add(head,e);		
+	}
+
+	print(head);
+
+	return 0;
+}
