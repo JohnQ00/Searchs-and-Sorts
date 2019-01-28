@@ -1,0 +1,63 @@
+//Listas Duplamente Encadeada
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node
+{
+	void *item;
+	struct node *next;
+	struct node *previous;
+};
+
+struct node *create(){return NULL;}
+
+struct node *add(struct node *head, void *item)
+{
+	struct node *new_node = (void*) malloc(sizeof(struct node)); //Aloca dinamicamente o struct node e cria uma variável temporária "new_node"
+	new_node->item = item; //Faz com que a nova variável aponte para o item no struct e receba o valor de item;
+	new_node->next = head; //Faz com que a nova variável aponte para o item no struct e receba o valor de head;
+	new_node->previous = NULL; // Para começar a lista duplamente encadeada o previous deve ser zerado;
+	if(head != NULL){head->previous = new_node;} //Se o primeiro elemento existir,ele deve ser passado para o previous para que o next seja adicionado;
+	return new_node; //Retorna o next como cabeça, prosseguindo com a lista.
+}
+
+void print(struct node *head)
+{
+	while(head != NULL)
+	{
+		printf("%d\n", head->item);
+		head = head->next;
+	}
+}
+
+struct node *backward(struct node *head)
+{
+	struct node *new_head = create();// Criação de uma nova lista;
+	while(head != NULL)
+	{
+		new_head = add(new_head, head->item);//Leva a nova head para o add com o item;
+		head = head->next;
+	}
+	free(head);
+	return new_head;//Retorna a nova cabeça, que seria a tail.
+}
+
+int main()
+{
+	int e;
+	struct node *head = create();
+
+	while(1)
+	{
+		scanf("%d", &e);
+		if (e == -1)
+		{break;}
+		head = add(head,e);
+	}
+
+	head = backward(head);	
+	print(head);
+
+	return 0;
+}
